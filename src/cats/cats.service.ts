@@ -6,13 +6,19 @@ import { CatModel } from "./cat.model";
 
 @Injectable()
 export class CatsService {
-  constructor(@InjectModel(CatModel) readonly catModel: ReturnModelType<typeof CatModel>) {}
+  private readonly catRepository: ReturnModelType<typeof CatModel>;
 
-  async create(createCatDto: { name: string }): Promise<CatModel> {
-    return this.catModel.create(createCatDto);
+  constructor(@InjectModel(CatModel) catRepository: ReturnModelType<typeof CatModel>) {
+    this.catRepository = catRepository;
   }
 
-  async findAll(): Promise<CatModel[]> {
-    return this.catModel.find().lean();
+  async create(createCatDto: { name: string }): Promise<CatModel> {
+    const cat: CatModel = await this.catRepository.create(createCatDto);
+    return cat;
+  }
+
+  async findAll() {
+    const cat: CatModel = await this.catRepository.findOne().lean();
+    return cat;
   }
 }

@@ -7,12 +7,12 @@ export class CatsController {
   constructor(private readonly catsService: CatsService) {}
 
   @Get()
-  findAll(): Promise<CatModel[] | null> {
+  findAll() {
     return this.catsService.findAll()
   }
 
   @Post()
-  create(@Body() body: CatModel): Promise<CatModel> {
+  create(@Body() body: any): Promise<CatModel> {
     return this.catsService.create(body);
   }
 }

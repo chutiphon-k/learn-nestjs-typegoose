@@ -11,7 +11,8 @@ import { CatsModule } from './cats/cats.module';
       useNewUrlParser: true,
       useUnifiedTopology: true,
       useCreateIndex: true,
-      autoCreate: true,
+      autoCreate: false,
+      autoIndex: false,
     }),
     CatsModule
   ],
