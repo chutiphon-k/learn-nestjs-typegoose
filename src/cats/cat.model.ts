@@ -1,5 +1,5 @@
 import { prop, modelOptions, index } from '@typegoose/typegoose';
-import { Base } from '@typegoose/typegoose/lib/defaultClasses';
+import { Base, TimeStamps } from '@typegoose/typegoose/lib/defaultClasses';
 
 @index({ name: 1 }, { unique: false })
 @modelOptions({
@@ -11,13 +11,8 @@ import { Base } from '@typegoose/typegoose/lib/defaultClasses';
     runSyncIndexes: true
   }
 })
-export class CatModel extends Base {
+export class CatModel {
   @prop({ required: true })
   name: string;
-
-  @prop({ default: Date.now })
-  createdAt: Date;
-
-  @prop({ default: Date.now })
-  updatedAt: Date;
 }
+export interface CatModel extends Base, TimeStamps {}
